@@ -8,7 +8,7 @@ import PostDetails from "./components/PostDetails/PostDetails";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
-  const navigate = useNavigate();
+  
   return (
     <BrowserRouter>
       <Container maxWidth="lg">
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/posts" exact element={<Home />} />
           <Route path="/posts/search" exact element={<Home />} />
           <Route path="/posts/:id" exact element={<PostDetails />} />
-          <Route path="/auth" exact element={!user ? <Auth /> : navigate("/")} />
+          <Route path="/auth" exact element={!user ? <Auth /> : <Home />} />
         </Routes>
       </Container>
     </BrowserRouter>
