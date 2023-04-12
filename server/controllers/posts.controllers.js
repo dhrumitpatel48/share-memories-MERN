@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.model.js";
 import logger from "../logger/logger.js";
+
 export const getPosts = async (req, res, next) => {
   try {
     logger.info("getPosts task started...");
@@ -13,10 +14,32 @@ export const getPosts = async (req, res, next) => {
   }
 };
 
+export const getPostsBySearch = async (req, res, next) => {
+  const { searchQuery, tags } = req.query;
+
+  try {
+    logger.info("getPostsBySearch task started...");
+    const title = new RegExp(searchQuery, "i");
+
+    const posts = await PostMessage.find({
+      $or: [{ title }, { tags: { $in: tags.split(",") } }],
+    });
+    res.status(200).json({ data: posts });
+    logger.info("getPostsBySearch task completed.");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+    logger.error(`Error in getPostsBySearch: ${error}`);
+  }
+};
+
 export const createPost = async (req, res, next) => {
   logger.info("createPost task started...");
   const post = req.body;
-  const newPost = new PostMessage({...post, creator: req.userId, createdAt: new Date().toISOString()});
+  const newPost = new PostMessage({
+    ...post,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
 
   try {
     await newPost.save();
