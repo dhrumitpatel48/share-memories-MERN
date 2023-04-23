@@ -13,13 +13,11 @@ export const getPosts = async (req, res, next) => {
       .sort({ _id: -1 })
       .limit(LIMIT)
       .skip(startIndex);
-    res
-      .status(200)
-      .json({
-        data: posts,
-        currentPage: Number(page),
-        numberOfPages: Math.ceil(total / LIMIT),
-      });
+    res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
     logger.error(`Error in getPosts: ${error}`);
@@ -41,6 +39,16 @@ export const getPostsBySearch = async (req, res, next) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
     logger.error(`Error in getPostsBySearch: ${error}`);
+  }
+};
+
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await PostMessage.findById(id);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
 
