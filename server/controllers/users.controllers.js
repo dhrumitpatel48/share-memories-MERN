@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import User from "../models/user.model.js";
+import logger from "../logger/logger.js";
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;
@@ -28,6 +29,7 @@ export const signin = async (req, res) => {
 
     res.status(200).json({ result: existingUser, token });
   } catch (error) {
+    logger.error(`Error in sign in: ${error}`);
     res.status(500).json({ message: "Something went wrong." });
   }
 };
@@ -61,6 +63,7 @@ export const signup = async (req, res) => {
 
     res.status(200).json({ result, token });
   } catch (error) {
+    logger.error(`Error in signup: ${error}`);
     res.status(500).json({ message: "Something went wrong." });
-  }
+  } 
 };

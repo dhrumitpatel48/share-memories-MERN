@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import logger from "../logger/logger.js";
 dotenv.config();
 
 const auth = async (req, res, next) => {
@@ -20,6 +21,7 @@ const auth = async (req, res, next) => {
 
     next();
   } catch (error) {
+    logger.error(`Error in auth Middeware: ${error}`);
     console.log(error);
   }
 };
