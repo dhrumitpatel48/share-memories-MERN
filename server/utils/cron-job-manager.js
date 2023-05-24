@@ -8,13 +8,11 @@ class JobManager {
   }
 
   createJob(name, fn, interval) {
-    console.log("Create jobb")
     const job = schedule.createJob(interval, fn);
     this.jobsMap.set(name, job);
   }
 
   getJob(name) {
-    console.log("getJobb")
     const job = this.jobsMap.get(name);
     if (!job) return;
     return job;
