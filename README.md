@@ -1,13 +1,12 @@
 # Memories - Share Your Life's Moments
 
-![Memories Banner](/path/to/banner/image.png)
-
 Welcome to Memories, a captivating social media application where you can share and relive your life's most cherished moments. Connect with friends, family, and like-minded individuals by posting your personal stories and photos. Dive into a world of memories that brings people together.
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Technologies](#technologies)
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -27,6 +26,16 @@ The application facilitates account creation, secure login functionality, and se
 - API Calls: Axios
 - Authentication: JSON Web Tokens (JWT)
 - Libraries: Nodemailer, Bcrypt.js, Winston, Mongoose
+
+## Screenshots
+1. Homepage
+![Homepage](/Demo/Homepage.png)
+2. Post
+![Post](/Demo/Post.png)
+3. Signup
+![Signup](/Demo/Signup.png)
+4. Login
+![Login](/Demo/Signin.png)
 
 ## Features
 
